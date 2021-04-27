@@ -5,6 +5,7 @@ body {
     height: -webkit-fill-available;
     overflow-x: auto;
     overflow-y: hidden;
+    background-color:rgb(238, 238, 238);
   }
   body > * {
     flex-shrink: 0;
@@ -84,5 +85,7 @@ body {
   /*Additional css*/
   .contentHolder
   {
-      background: rgb(228, 228, 228);
+     background-color: white;
+     width:auto;
+     float:center;
   }

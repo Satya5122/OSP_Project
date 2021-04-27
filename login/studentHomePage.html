@@ -52,10 +52,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="studentHomePage.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <button type="button" class="btn btn-info" data-toggle="collapse"
+                            href="#collapsingSidebar">show</button>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -94,7 +95,7 @@
     <div class="row">
         <div class="col-2">
             <div class="sidebar">
-                <div class="p-3 bg-white" style="width: 280px; float: left;">
+                <div class="p-1 bg-white" style="width: 200px; float: left;">
 
                     <ul class="list-unstyled ps-0">
                         <li class="mb-1">
@@ -114,54 +115,211 @@
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                                Dashboard
+                                My Info
                             </button>
                             <div class="collapse" id="dashboard-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-dark rounded">Overview</a></li>
-                                    <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                                    <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                                    <li><a href="#" class="link-dark rounded">Annually</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="mb-1">
-                            <button class="btn btn-toggle align-items-center rounded collapsed"
-                                data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                                Orders
-                            </button>
-                            <div class="collapse" id="orders-collapse">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-dark rounded">New</a></li>
-                                    <li><a href="#" class="link-dark rounded">Processed</a></li>
-                                    <li><a href="#" class="link-dark rounded">Shipped</a></li>
-                                    <li><a href="#" class="link-dark rounded">Returned</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- <li class="border-top my-3"></li>-->
-                        <li class="mb-1">
-                            <button class="btn btn-toggle align-items-center rounded collapsed"
-                                data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                                Account
-                            </button>
-                            <div class="collapse" id="account-collapse">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="#" class="link-dark rounded">New...</a></li>
                                     <li><a href="#" class="link-dark rounded">Profile</a></li>
-                                    <li><a href="#" class="link-dark rounded">Settings</a></li>
-                                    <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                                    <li><a href="#" class="link-dark rounded">Your Credentials</a></li>
+                                    <li><a href="#" class="link-dark rounded">Day Boarder Info</a></li>
+                                    <li><a href="#" class="link-dark rounded">Acknowledgement view</a></li>
+                                    <li><a href="#" class="link-dark rounded">Student Bank Info</a></li>
+                                    <li><a href="#" class="link-dark rounded">Digital ipad credentials</a></li>
+
                                 </ul>
                             </div>
                         </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#infoCorner-collapse" aria-expanded="false">
+                                Info Corner
+                            </button>
+                            <div class="collapse" id="infoCorner-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-dark rounded">FAQ</a></li>
+                                    <li><a href="#" class="link-dark rounded">SpotLight</a></li>
+                                    <li><a href="#" class="link-dark rounded">View Circulars</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#procter-collapse" aria-expanded="false">
+                                Procter
+                            </button>
+                            <div class="collapse" id="procter-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-dark rounded">Procter Details</a></li>
+                                    <li><a href="#" class="link-dark rounded">Message from procter</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#Academics-collapse" aria-expanded="false">
+                                My Info
+                            </button>
+                            <div class="collapse" id="Academics-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-dark rounded">HOD and Dean Info</a></li>
+                                    <li><a href="#" class="link-dark rounded">Faculty Info</a></li>
+                                    <li><a href="#" class="link-dark rounded">Biometric Info</a></li>
+                                    <li><a href="#" class="link-dark rounded">Class Message</a></li>
+                                    <li><a href="#" class="link-dark rounded">Regulation</a></li>
+                                    <li><a href="#" class="link-dark rounded">My Curriculum</a></li>
+                                    <li><a href="#" class="link-dark rounded">Minor/Honour</a></li>
+                                    <li><a href="#" class="link-dark rounded">Time Table</a></li>
+                                    <li><a href="#" class="link-dark rounded">Course Option Change</a></li>
+                                    <li><a href="#" class="link-dark rounded">Course Withdraw</a></li>
+                                    <li><a href="#" class="link-dark rounded">Class Attendance</a></li>
+                                    <li><a href="#" class="link-dark rounded">Course Page</a></li>
+                                    <li><a href="#" class="link-dark rounded">Industrial Internship</a></li>
+                                    <li><a href="#" class="link-dark rounded">Project</a></li>
+                                    <li><a href="#" class="link-dark rounded">Digital Assignment Upload</a></li>
+                                    <li><a href="#" class="link-dark rounded">QCM View</a></li>
+                                    <li><a href="#" class="link-dark rounded">SET Conference Regestration</a></li>
+                                    <li><a href="#" class="link-dark rounded">Co-Extra Curricular</a></li>
+                                    li><a href="#" class="link-dark rounded">Wishlist Regestration</a>
+                        </li>
+                        <li><a href="#" class="link-dark rounded">Axademic Calendar</a></li>
+
                     </ul>
                 </div>
-            </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Research-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Research-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">My Search Profile</a></li>
+                            <li><a href="#" class="link-dark rounded">SEM Request</a></li>
+                            <li><a href="#" class="link-dark rounded">Course Work Regestration</a></li>
+                            <li><a href="#" class="link-dark rounded">Regestration Status</a></li>
+                            <li><a href="#" class="link-dark rounded">Meeting Info</a></li>
+                            <li><a href="#" class="link-dark rounded">Attendance View</a></li>
+                            <li><a href="#" class="link-dark rounded">ScholarLeave Request</a></li>
+                            <li><a href="#" class="link-dark rounded">Research Letters</a></li>
 
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Examination-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Examination-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">Exam Schedule</a></li>
+                            <li><a href="#" class="link-dark rounded">Marks</a></li>
+                            <li><a href="#" class="link-dark rounded">Grades</a></li>
+                            <li><a href="#" class="link-dark rounded">Paper See/Rev</a></li>
+                            <li><a href="#" class="link-dark rounded">Grade History</a></li>
+                            <li><a href="#" class="link-dark rounded">Project File Upload</a></li>
+                            <li><a href="#" class="link-dark rounded">MOOC File Upload</a></li>
+                            <li><a href="#" class="link-dark rounded">ECA File Upload</a></li>
+                            <li><a href="#" class="link-dark rounded">EPT Schedule</a></li>
+                            <li><a href="#" class="link-dark rounded">Comprehensive</a></li>
+                            <li><a href="#" class="link-dark rounded">Arrear Details</a></li>
+                            <li><a href="#" class="link-dark rounded">Re-Exam Application</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Services-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Services-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">PAT Regestration</a></li>
+                            <li><a href="#" class="link-dark rounded">Online Book Recommendation</a></li>
+                            <li><a href="#" class="link-dark rounded">Transcript Request</a></li>
+                            <li><a href="#" class="link-dark rounded">Achievements</a></li>
+                            <li><a href="#" class="link-dark rounded">Programme Migration</a></li>
+                            <li><a href="#" class="link-dark rounded">Late Hour Request</a></li>
+                            <li><a href="#" class="link-dark rounded">Final Year Regestration</a></li>
+                            <li><a href="#" class="link-dark rounded">SAP Application</a></li>
+                            <li><a href="#" class="link-dark rounded">Fresher Certificate Upload</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Library-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Library-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">Scanning Request</a></li>
+                            <li><a href="#" class="link-dark rounded">My Keys</a></li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Bonafide-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Bonafide-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">Apply Bonafide</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Online Payments-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Online Payments-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">Payments</a></li>
+                            <li><a href="#" class="link-dark rounded">Payment Receipts</a></li>
+                            <li><a href="#" class="link-dark rounded">Online Transfer</a></li>
+                            <li><a href="#" class="link-dark rounded">Library</a></li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#Hostel-collapse" aria-expanded="false">
+                        My Info
+                    </button>
+                    <div class="collapse" id="Hostel-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-dark rounded">Fresher Hostel Registration</a></li>
+                            <li><a href="#" class="link-dark rounded">Leave Request</a></li>
+                            <li><a href="#" class="link-dark rounded">Mess Selection 2021-2022</a></li>
+                            <li><a href="#" class="link-dark rounded">Mess Change</a></li>
+                            <li><a href="#" class="link-dark rounded">Fall 19-20 Room-Details</a></li>
+
+
+                        </ul>
+                    </div>
+                </li>
+                <!-- <li class="border-top my-3"></li>-->
+
+                </ul>
+            </div>
         </div>
-        <div class="col-10">
-            <div class="container contentHolder container-primary" style="float:right;">hi i am a div</div>
-        </div>
+
+    </div>
+
+    <div class="col-10">
+        <div class="jumbotron contentHolder">main content</div>
+    </div>
 
     </div>
 
@@ -176,9 +334,9 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+        </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
