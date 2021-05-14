@@ -1,3 +1,32 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login_student($con);
+    $student_name = $user_data['student_name'];
+    $student_id= $user_data['student_reg_no'];
+
+    //teachers list
+    $teacher_names=array();
+    $query="select * from classroom where student_reg_no='$student_id'";
+    $course_result=mysqli_query($con,$query);
+    while($row=mysqli_fetch_array($course_result))
+    {
+        $course_id= $row['course_id'];
+        $slot=$row['slot'];
+        $query="select emp_id from course_table where slot='$slot' AND course_id='$course_id'";
+        $teacher_id_result=mysqli_query($con,$query);
+        $teacher_id=mysqli_fetch_array($teacher_id_result)['emp_id'];
+        
+        $query="select teacher_name from teacher where emp_id='$teacher_id'";
+        $teacher_name_result=mysqli_query($con,$query);
+        $teacher_name=mysqli_fetch_array($teacher_name_result)['teacher_name'];
+        $num_rows=array_push($teacher_names,$teacher_name);
+
+    }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -37,17 +66,31 @@
                 font-size: 3.5rem;
             }
         }
+        #student_name{
+            color:black;
+        }
     </style>
     <link href="css/sidebar.css" rel="stylesheet">
     <script>
         $(document).ready(function () {
+            $(".hide_this").hide();
             $(".content .tab_content").hide();
             $(".sidebar-data").click(function () {
                 var current_tab = $(this).attr('contentFrom');
                 $(".content .tab_content").hide();
                 $("." + current_tab).show();
             });
+            
         });
+    </script>
+    <script>
+    function change_teacher() 
+    {
+        
+                var teacher_name_data=$(this).value();
+                $(.teacher_name).value=teacher_name_data;
+            
+    }
     </script>
 </head>
 
@@ -96,8 +139,13 @@
 
 
                 </ul>
-                <a class="nav-link disabled" aria-current="page" href="#" id="studentInformation">Immani Sri Satya
-                    Sai</a>
+                <?php
+                echo "<a class='p-2' style='color:black;'>$student_name</a>
+                "
+                ?>
+                
+                <a href="logout.php" > <button class="btn btn-danger"> Log Out </button></a>
+                
                 <!--<form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -331,23 +379,28 @@
             <!--This is teacher appointment-->
             <div class="tab_content teacher-appointment">
                 <div class="container">
-                    <form method="POST">
+                    <form method="POST" action='add_appointment.php' >
                         <label class="py-3" type="form-label" for="select-teacher">Please Select you teacher</label>
+                        <?php
+                        echo "<input class='hide_this' value='$student_id' name='student_id_data'></input>";
+                        ?>
                         <div class="input-group mb-3" id="select-teacher">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false"></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">USHA DEVI G</a></li>
-                                <li><a class="dropdown-item" href="#">JAYAKUMAR S</a></li>
-                                <li><a class="dropdown-item" href="#">SENTHIL KUMAR NATHAN</a></li>
-
-                            </ul>
-                            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                            
+<select name='teacher_name_selection' class="custom-select form-control"  style="width:150px;">
+                            <?php
+                            for($i=0;$i<$num_rows;$i++)
+                            {
+                                echo "<option>$teacher_names[$i]</option>";
+                            }
+                            ?>
+                                </select>
+                            
                         </div>
                         <label class="py-3" for="reason" type="form-label">Reason for the appointment</label>
-                        <input class="form-control mb-3" type="text" id="reason">
+                        <input class="form-control mb-3" type="text" name="reason">
                         <button type="submit" class="btn btn-success mb-3">Add Appointment</button>
                     </form>
+                    
                 </div>
 
             </div>
@@ -395,7 +448,7 @@
     </div>
 
 
-
+    
 
 
 

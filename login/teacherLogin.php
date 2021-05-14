@@ -1,3 +1,54 @@
+<?php 
+
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+    if(isset($_SESSION['user_id']))
+    {
+        unset($_SESSION['user_id']);
+    
+    }
+	if($_SERVER['REQUEST_METHOD'] == "POST")
+	{
+		//something was posted
+		$user_name = $_POST['user_name'];
+		$password = $_POST['passwd'];
+
+		if(!empty($user_name) && !empty($password) )
+		{
+
+			//read from database
+			$query = "select * from teacher where emp_id = '$user_name' limit 1";
+			$result = mysqli_query($con, $query);
+
+			if($result)
+			{
+				
+                if($result && mysqli_num_rows($result) > 0)
+				{
+
+					$user_data = mysqli_fetch_assoc($result);
+					
+					if($user_data['teacher_passwd'] === $password)
+					{
+
+						$_SESSION['user_id'] = $user_data['emp_id'];
+						header("Location: teacherHomePage.php");
+						die;
+					}
+				}
+			}
+			
+			echo "wrong username or password!";
+		}else
+		{
+			echo "wrong username or password!";
+		}
+	}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -79,15 +130,15 @@
                 </div>
                 <div class="col-lg-7 py-5 pt-5">
                     <h1 class="font-weight-bold pt-5">TEACHER LOGIN</h1>
-                    <form action="">
+                    <form  method="post">
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="text" class="form-control my-3 p-2" placeholder="Registration number">
+                                <input name="user_name" type="text" class="form-control my-3 p-2" placeholder="employee id">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="password" class="form-control my-3 p-2" placeholder="************">
+                                <input name="passwd"type="password" class="form-control my-3 p-2" placeholder="************">
                             </div>
                         </div>
                         <div class="form-row">

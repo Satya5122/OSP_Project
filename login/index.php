@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['user_id']))
+{
+	unset($_SESSION['user_id']);
+
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -14,6 +22,16 @@
     Vellore Institute of Technology(VIT)
   </title>
   <link rel="icon" type="image/png" href="images/vitlogo.png">
+  <script type="text/javascript">
+         function student_login_redirect()
+         {
+          window.location="http://localhost/OSP_Project/login/student.php";
+         }
+         function teacher_login_redirect()
+         {
+           window.location="http://localhost/OSP_Project/login/teacherLogin.php";
+         }
+      </script>
 </head>
 
 <body>
@@ -28,8 +46,9 @@
   </nav>
   <div class="container">
     <div class="pt-5 row gy-4">
-      <a href="student.html"><button class="btn btn-primary"> STUDENT LOGIN</button></a>
-      <a href="teacherLogin.html"><button class="btn btn-primary"> TEACHER LOGIN</button></a>
+      <a id="student_login"><button onclick="student_login_redirect()" class="btn btn-primary"> STUDENT LOGIN</button></a>
+      
+      <a id="teacher_login"><button onclick="teacher_login_redirect()"class="btn btn-primary"> TEACHER LOGIN</button></a>
     </div>
   </div>
 

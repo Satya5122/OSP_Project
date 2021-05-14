@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login_teacher($con);
+    $emp_name = $user_data['teacher_name'];
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -37,10 +47,14 @@
                 font-size: 3.5rem;
             }
         }
+        #employee_name {
+            color:black;
+        }
     </style>
     <link href="css/sidebar.css" rel="stylesheet">
     <script>
         $(document).ready(function () {
+            
             $(".content .tab_content").hide();
             $(".sidebar-data").click(function () {
                 var current_tab = $(this).attr('contentFrom');
@@ -95,8 +109,11 @@
 
 
                 </ul>
-                <a class="nav-link disabled" aria-current="page" href="#" id="studentInformation">Immani Sri Satya
-                    Sai</a>
+                <?php
+                echo "<a class='p-2' style='color:black;'>$emp_name</a>
+                "
+                ?>
+                <a href="logout.php" > <button class="btn btn-danger"> Log Out </button></a>
                 <!--<form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -253,7 +270,7 @@
                                     <th scope="col">Message</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="student-applications">
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>Immani Sri Satya Sai</td>
