@@ -54,15 +54,36 @@ session_start();
     <link href="css/sidebar.css" rel="stylesheet">
     <script>
         $(document).ready(function () {
-            
+           
+            $(".hide_this").hide();
+            $show_class="<?php
+            $con=mysqli_connect('localhost','root','','college_db');
+            $query="select page_name from active_page_teacher where status=1";
+            $result=mysqli_query($con,$query);
+            $value=mysqli_fetch_array($result);
+            if($value!="")
+            {
+                echo $value['page_name'];
+            }
+            else
+            {
+                echo "main_tab";
+            }
+            ?>";
             $(".content .tab_content").hide();
-            $(".sidebar-data").click(function () {
-                var current_tab = $(this).attr('contentFrom');
-                $(".content .tab_content").hide();
-                $("." + current_tab).show();
-            });
+            $("."+$show_class).show();
+            
+            
         });
+        
     </script>
+    
+    <style>
+input{
+    background-color: WHITE;
+}
+
+</style>
 </head>
 
 <body>
@@ -78,7 +99,7 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="studentHomePage.html">Home</a>
+                        <a class="nav-link active" aria-current="page"href="home_page_teacher.php">Home</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -93,8 +114,9 @@ session_start();
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li class="sidebar-data" contentFrom="student-appointment"><a class="dropdown-item"
-                                    href="#">Student Appointments</a></li>
+                            <li class="sidebar-data" contentFrom="student_appointment"><form class="dropdown-item" action="action_student_appointment.php">
+                            <input style="border-style: none; " type="submit" value="Student Appoinment">
+                            </form></li>
 
 
                             <li>
@@ -102,8 +124,9 @@ session_start();
                             </li>
 
 
-                            <li class="sidebar-data" contentFrom="room-service"><a class="dropdown-item" href="#">Room
-                                    Maintenance</a></li>
+                            <li class="sidebar-data" contentFrom="teacher_room"><form class="dropdown-item" action="action_room_teacher.php">
+                            <input style="border-style: none; " type="submit" value="Room Maintenance">
+                            </form></li>
                         </ul>
                     </li>
 
@@ -113,7 +136,7 @@ session_start();
                 echo "<a class='p-2' style='color:black;'>$emp_name</a>
                 "
                 ?>
-                <a href="logout.php" > <button class="btn btn-danger"> Log Out </button></a>
+                <a href="logout_teacher.php" > <button class="btn btn-danger"> Log Out </button></a>
                 <!--<form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -255,11 +278,14 @@ session_start();
         </div>
 
         <div class="content col-10">
+        <div class="tab_content main_tab">
+        
+        </div>
             <!--This is student appointment-->
-            <div class="tab_content student-appointment">
+            <div class="tab_content student_appointment" id="student_appoinment_data">
                 <div class="container">
-                    <form method="POST">
-                        <table class="table" id="student-appointments-recieved">
+                <form method="POST" action="appointment_validation.php">
+                        <table class="table" id="student_appointments_recieved">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -271,61 +297,68 @@ session_start();
                                 </tr>
                             </thead>
                             <tbody class="student-applications">
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Immani Sri Satya Sai</td>
-                                    <td>18BIT0084</td>
-                                    <td>Needed help with my ongoing project</td>
+                            <?php
+                    $con=mysqli_connect('localhost','root','','college_db');
+                    $emp_id=$user_data['emp_id'];
+                    $result=mysqli_query($con,"select student_reg_no,message from appointments where emp_id='$emp_id' and status=0");
+                    $sno=1;
+                    $row_no=1;
+                    $emp_id=$user_data['emp_id'];
+                        echo "<input name='emp_id' type='text' class='hide_this' value=$emp_id>";
+                    while($row=mysqli_fetch_array($result))
+                    {
+                        $message=$row['message'];
+                        $student_reg_no=$row['student_reg_no'];
+                        $student_data=mysqli_query($con,"select student_name from student where student_reg_no='$student_reg_no'");
+                        $student_name=mysqli_fetch_array($student_data)['student_name'];
+                        
+                        echo '<tr>
+                        <th scope="row">'; echo "$row_no"; echo'</th>
+                        <td>'; echo "$student_name"; echo '</td>
+                        <td>';
+                        echo "<input name='stud_reg_no_"; echo"$sno"; echo"' type='text' class='hide_this' value=$student_reg_no>";
+                        
+                        echo"$student_reg_no";
+                       
+                        echo '</td>
+                        <td>';
+                        echo "$message";         
+                       echo "</td>
 
-                                    <td>
-                                        <div class="btn-group" role="group"
-                                            aria-label="Basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
-                                                autocomplete="off" checked>
-                                            <label class="btn btn-outline-primary" for="btnradio1">Approved</label>
+                        <td>
+                            <div class='btn-group' role='group'
+                                aria-label='Basic radio toggle button group'>
+                                <input type='radio' class='btn-check' name='btnradio"; echo"$sno"; echo"' id='student"; echo"$sno"; echo"'
+                                    autocomplete='off'  value=1> 
+                                <label class='btn btn-outline-primary' for='student"; echo"$sno"; echo"'>Approved</label>
 
-                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btnradio2">Denied</label>
-
-
-                                        </div>
-                                    </td>
-                                    <td><input type="text" class="form-control"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Rohith Raut</td>
-                                    <td>19BIT0403</td>
-                                    <td>Attendence issue</td>
-
-                                    <td>
-                                        <div class="btn-group" role="group"
-                                            aria-label="Basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="btnradio1" id="btnradio3"
-                                                autocomplete="off" checked>
-                                            <label class="btn btn-outline-primary" for="btnradio3">Approved</label>
-
-                                            <input type="radio" class="btn-check" name="btnradio1" id="btnradio4"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-primary" for="btnradio4">Denied</label>
+                                <input type='radio' class='btn-check' name='btnradio"; echo"$sno"; echo"' id='student"; echo"$sno+1"; echo"'
+                                    autocomplete='off' value=-1>
+                                <label class='btn btn-outline-primary' for='student"; echo"$sno+1"; echo"'>Denied</label>
 
 
-                                        </div>
-                                    </td>
-                                    <td><input type="text" class="form-control"></td>
-                                </tr>
+                            </div>
+                        </td>
+                        <td><input type='text' class='form-control'></td>
+                    </tr>";
+                    $sno=$sno+2;
+                    $row_no+=1;
+                    echo '>';
 
+                    }
+                    echo "<input name='sno' type='number' class='hide_this' value=$sno> ";
+                    ?>
                             </tbody>
                         </table>
-                        <input class="btn btn-success mb-3" type="submit" value="Confirm Appointments">
+                        <input class="btn btn-success mb-3 submit_student_appointments" id="" type="submit" value="Validate Appointments">
                     </form>
+                    
                 </div>
 
             </div>
 
             <!--This is Room maintenance-->
-            <div class="tab_content room-service">
+            <div class="tab_content teacher_room">
                 <div class="container">
                     <form method="POST">
                         <h1 Style="text-align:left; color:rgba(1, 162, 255, 0.479);">Room Maintenance</h1>

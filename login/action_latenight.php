@@ -1,14 +1,6 @@
 <?php
-
-session_start();
 $con=mysqli_connect('localhost','root','','college_db');
 mysqli_query($con,"update active_page set status=-1 where status=1");
-if(isset($_SESSION['user_id']))
-{
-	unset($_SESSION['user_id']);
-
-}
-
-header("Location: index.php");
-die;
+mysqli_query($con,"update active_page set status=1 where page_name='latenight-permission'");
+header("Location: studentHomePage.php" );
 ?>

@@ -1,14 +1,7 @@
-<?php 
-session_start();
-
-	include("connection.php");
-	include("functions.php");
-
-	$user_data = check_login_student($con);
-    $student_name = $user_data['student_name'];
-    $student_id= $user_data['student_reg_no'];
-
-    //teachers list
+<?php
+include('user_data.php');
+?>
+ <?php  //teachers list
     $teacher_names=array();
     $query="select * from classroom where student_reg_no='$student_id'";
     $course_result=mysqli_query($con,$query);
@@ -74,28 +67,43 @@ session_start();
     <script>
         $(document).ready(function () {
             $(".hide_this").hide();
+            
+            $show_class="<?php
+            $con=mysqli_connect('localhost','root','','college_db');
+            $query="select page_name from active_page where status=1";
+            $result=mysqli_query($con,$query);
+            $value=mysqli_fetch_array($result);
+            if($value!="")
+            {
+                echo $value['page_name'];
+            }
+            else
+            {
+                echo "main_tab";
+            }
+            ?>";
             $(".content .tab_content").hide();
-            $(".sidebar-data").click(function () {
-                var current_tab = $(this).attr('contentFrom');
-                $(".content .tab_content").hide();
-                $("." + current_tab).show();
-            });
+            $("."+$show_class).show();
+            
             
         });
     </script>
-    <script>
-    function change_teacher() 
-    {
-        
-                var teacher_name_data=$(this).value();
-                $(.teacher_name).value=teacher_name_data;
-            
+    <!-- <script>
+    function change_to_library_permission() {
+        document.getElementById("content_container_element").innerHTML=('');
     }
-    </script>
+    </script> -->
+    
 </head>
+<style>
+input{
+    background-color: WHITE;
+}
+
+</style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
             <a href="#" class="navbar-brand"><img src="images/logo.PNG" class=" rounded border-0" alt="VIT Vellore"
                     id="LOGO"></a>
@@ -107,7 +115,8 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="studentHomePage.html">Home</a>
+                        <a class="nav-link active home" aria-current="page" href="home_page_student.php">Home</a>
+                        
                     </li>
 
                     <li class="nav-item dropdown">
@@ -122,18 +131,21 @@ session_start();
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li class="sidebar-data" contentFrom="teacher-appointment"><a class="dropdown-item"
-                                    href="#">Teacher Appointments</a></li>
+                            <li class="sidebar-data teacher_appointment_element" contentFrom="teacher_appointment"><form class="dropdown-item" action="action.php">
+                            <input style="border-style: none; " type="submit" value="Teacher Appoinment">
+                            </form></li>
 
 
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
 
-                            <li class="sidebar-data" contentFrom="latenight-permission"><a class="dropdown-item"
-                                    href="#">Late Night Permission</a></li>
-                            <li class="sidebar-data" contentFrom="room-service"><a class="dropdown-item" href="#">Room
-                                    Maintenance</a></li>
+                            <li class="sidebar-data" contentFrom="latenight-permission"><form class="dropdown-item" action="action_latenight.php">
+                            <input style="border-style: none; " type="submit" value="Late Night Permission">
+                            </form></li>
+                            <li class="sidebar-data" contentFrom="room-service"><form class="dropdown-item" action="action_roomservice.php">
+                            <input style="border-style: none; " type="submit" value="Room Service">
+                            </form></li>
                         </ul>
                     </li>
 
@@ -144,7 +156,7 @@ session_start();
                 "
                 ?>
                 
-                <a href="logout.php" > <button class="btn btn-danger"> Log Out </button></a>
+                <a href="logout.php" > <button class="btn btn-danger" > Log Out </button></a>
                 
                 <!--<form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -376,8 +388,13 @@ session_start();
         </div>
 
         <div class="content col-10">
+            <div class="tab_content main_tab">
+            <div class="container">
+            
+            </div>
+            </div>
             <!--This is teacher appointment-->
-            <div class="tab_content teacher-appointment">
+            <div class="tab_content teacher_appointment">
                 <div class="container">
                     <form method="POST" action='add_appointment.php' >
                         <label class="py-3" type="form-label" for="select-teacher">Please Select you teacher</label>
@@ -402,7 +419,43 @@ session_start();
                     </form>
                     
                 </div>
+                
 
+            </div>
+            <div style="padding: 15px" class="tab_content teacher_appointment">
+            <div class="container">
+                <?php
+                
+                $query="select * from appointments where student_reg_no='$student_id'";
+                $result=mysqli_query($con,$query);
+                if(!$result)
+                {
+                    echo "";
+                }
+                else
+                {
+                    while($row=mysqli_fetch_array($result))
+                    {
+                        
+                        $emp_id_of_teacher=$row['emp_id'];
+                        $query="select teacher_name from teacher where emp_id='$emp_id_of_teacher'";
+                $temp=mysqli_query($con,$query);
+                        $teacher_name=mysqli_fetch_array($temp)['teacher_name'];
+                        if($row['status']==1)
+                        {
+                            echo "$teacher_name accepted your appointment"."<br>";
+                        }
+                        else if($row['status']==-1)
+                        {
+                             echo "$teacher_name, did not accept your appointment"."<br>";
+                        }
+                       
+                    }
+                }
+                
+               
+                ?>
+                </div>
             </div>
             <!--this is late night permission-->
             <div class="tab_content latenight-permission">

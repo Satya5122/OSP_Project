@@ -14,6 +14,7 @@ $message=$_POST['reason'];
 // setting default Status
 $status=0;
 
+$clean_data=mysqli_query($con,"delete from appointments where student_reg_no='$student_id' and emp_id='$teacher_id'");
 $query="insert into appointments (emp_id,student_reg_no,message,status) 
 VALUES ('$teacher_id','$student_id','$message','$status')"; 
 if($result=mysqli_query($con,$query))
